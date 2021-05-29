@@ -1,6 +1,6 @@
 module Library where
 import PdePreludat hiding (foldr, sum, elem, all)
-import Prelude (foldr, sum, elem, all, Foldable(..), Num, concat)
+import Prelude (foldr, sum, elem, all, Foldable(..))
 
 -- Desafio 1: Look and say, o https://es.wikipedia.org/wiki/Constante_de_Conway
 --
@@ -14,18 +14,19 @@ import Prelude (foldr, sum, elem, all, Foldable(..), Num, concat)
 -- etc...
 -- 
 
--- addDigit :: Number -> Number -> Number
--- addDigit a b | a < 0     = a * 10 - b
---              | otherwise = a * 10 + b
+-- agregaDigito :: Number -> Number -> Number
+-- agregaDigito a b 
+--  | a < 0     = a * 10 - b
+--  | otherwise = a * 10 + b
 
-foldl' :: (b -> a -> b) -> b -> [a] -> b
-foldl' f z [] = z
-foldl' f z (x : xs) = foldl' f (f z x) xs
+-- foldl' :: (b -> a -> b) -> b -> [a] -> b
+-- foldl' f z [] = z
+-- foldl' f z (x : xs) = foldl' f (f z x) xs
 
 lookAndSay :: [Number]
 lookAndSay = implementame 
 
--- 1 : 11 : (tamaño) 2 (tamaño) 1 : (tamaño) 1 (tamaño) 2 (tamaño) 11 : 111221 : 312211 : 13112221 
+-- 1 : 11 : 21 :  1 211 : 111221 : 312211 : 13112221 
 -- 0    1   2     12    111       312     1311
 -- 1    1   1     11    221       211     2221
 -- 0 :  1 :  2 :  3   :   4    :    5 
