@@ -14,21 +14,9 @@ import Prelude (foldr, sum, elem, all, Foldable(..))
 -- etc...
 -- 
 
--- agruparElementosIguales :: Eq a => [a] -> [[a]]
--- agruparElementosIguales [] = []
--- agruparElementosIguales [x] = [[x]]
--- agruparElementosIguales (x:y:ys)
---     | x == y = [x,y] : agruparElementosIguales ys
---     | otherwise = [x] : [y] : agruparElementosIguales ys
-
--- agregaDigito :: Number -> Number -> Number
--- agregaDigito a b 
---  | a < 0     = a * 10 - b
---  | otherwise = a * 10 + b
-
--- foldl' :: (b -> a -> b) -> b -> [a] -> b
--- foldl' f z [] = z
--- foldl' f z (x : xs) = foldl' f (f z x) xs
+foldl' :: (b -> a -> b) -> b -> [a] -> b
+foldl' funcion semilla [] = semilla
+foldl' funcion semilla (x : xs) = foldl' funcion (funcion semilla x) xs
 
 length':: [a] -> Number
 length' = sum . map (\x -> 1)
@@ -46,8 +34,29 @@ agruparElementosIguales (x:xs) = (x : takeWhile (esIgual x) xs) : agruparElement
 auxiliar :: [Char] -> [Char]
 auxiliar string = concatMap cuentaDigitos (agruparElementosIguales string)
 
---lookAndSay :: [Number]
-lookAndSay =  iterate auxiliar "1"
+charToNumber :: Char -> Number
+charToNumber '0' = 0
+charToNumber '1' = 1
+charToNumber '2' = 2
+charToNumber '3' = 3
+charToNumber '4' = 4
+charToNumber '5' = 5
+charToNumber '6' = 6
+charToNumber '7' = 7
+charToNumber '8' = 8
+charToNumber '9' = 9
+
+agregaDigitoAlFinal :: Number -> Number -> Number
+agregaDigitoAlFinal num otroNum = num * 10 + otroNum 
+
+stringToNumber :: [Char] -> Number
+stringToNumber string = foldl' agregaDigitoAlFinal 0 (map charToNumber string)
+
+lookAndSay :: [Number]
+lookAndSay = map stringToNumber (iterate auxiliar "1") 
+
+lookAndSay' :: [String]
+lookAndSay' = iterate auxiliar "1"
 
 -- Desafio 2: Un foldr para una flor
 --
