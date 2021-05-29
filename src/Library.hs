@@ -14,6 +14,13 @@ import Prelude (foldr, sum, elem, all, Foldable(..))
 -- etc...
 -- 
 
+-- agruparElementosIguales :: Eq a => [a] -> [[a]]
+-- agruparElementosIguales [] = []
+-- agruparElementosIguales [x] = [[x]]
+-- agruparElementosIguales (x:y:ys)
+--     | x == y = [x,y] : agruparElementosIguales ys
+--     | otherwise = [x] : [y] : agruparElementosIguales ys
+
 -- agregaDigito :: Number -> Number -> Number
 -- agregaDigito a b 
 --  | a < 0     = a * 10 - b
@@ -26,10 +33,23 @@ import Prelude (foldr, sum, elem, all, Foldable(..))
 length':: [a] -> Number
 length' = sum . map (\x -> 1)
 
-lookAndSay :: [Number]
-lookAndSay = implementame  
+cuentaDigitos :: String -> String
+cuentaDigitos string = show (length' string) ++ [head string]
 
--- 1 : 11 : 21 :  1 211 : 111221 : 312211 : 13112221 
+esIgual :: Eq a => a -> a -> Bool
+esIgual x y = x==y
+
+agruparElementosIguales :: (Eq a) => [a] -> [[a]]
+agruparElementosIguales []     = []
+agruparElementosIguales (x:xs) = (x : takeWhile (esIgual x) xs) : agruparElementosIguales (dropWhile (esIgual x) xs)
+
+auxiliar :: [Char] -> [Char]
+auxiliar string = concatMap cuentaDigitos (agruparElementosIguales string)
+
+--lookAndSay :: [Number]
+lookAndSay =  iterate auxiliar "1"
+
+-- 1 : 11 : 21 :  1 2 1 1 : 1 1 1221 : 312211 : 13112221 
 -- 0    1   2     12    111       312     1311
 -- 1    1   1     11    221       211     2221
 -- 0 :  1 :  2 :  3   :   4    :    5 
