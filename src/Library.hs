@@ -49,12 +49,6 @@ auxiliar string = concatMap cuentaDigitos (agruparElementosIguales string)
 --lookAndSay :: [Number]
 lookAndSay =  iterate auxiliar "1"
 
--- 1 : 11 : 21 :  1 2 1 1 : 1 1 1221 : 312211 : 13112221 
--- 0    1   2     12    111       312     1311
--- 1    1   1     11    221       211     2221
--- 0 :  1 :  2 :  3   :   4    :    5 
---------------------------------------------------------------------
-
 -- Desafio 2: Un foldr para una flor
 --
 -- En computación, un "rose tree" es un árbol donde cada nodo puede tener una
