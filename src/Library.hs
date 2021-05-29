@@ -23,8 +23,11 @@ import Prelude (foldr, sum, elem, all, Foldable(..))
 -- foldl' f z [] = z
 -- foldl' f z (x : xs) = foldl' f (f z x) xs
 
+length':: [a] -> Number
+length' = sum . map (\x -> 1)
+
 lookAndSay :: [Number]
-lookAndSay = implementame 
+lookAndSay = implementame  
 
 -- 1 : 11 : 21 :  1 211 : 111221 : 312211 : 13112221 
 -- 0    1   2     12    111       312     1311
@@ -86,3 +89,7 @@ instance Foldable RoseTree where
 creaLista :: RoseTree a -> [a]
 creaLista (RoseTree valor []) = [valor]
 creaLista ( RoseTree valor lista ) = valor : concatMap creaLista lista
+
+-- foldr' :: (a -> b -> b) -> b -> [a] -> b
+-- foldr' _ semilla [] = semilla
+-- foldr' funcion semilla (x:xs) = funcion x (foldr' funcion semilla xs)
