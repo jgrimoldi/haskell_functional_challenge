@@ -52,11 +52,11 @@ agregaDigitoAlFinal num otroNum = num * 10 + otroNum
 stringToNumber :: [Char] -> Number
 stringToNumber string = foldl' agregaDigitoAlFinal 0 (map charToNumber string)
 
-lookAndSay :: [Number]
-lookAndSay = map stringToNumber (iterate auxiliar "1") 
-
 lookAndSay' :: [String]
 lookAndSay' = iterate auxiliar "1"
+
+lookAndSay :: [Number]
+lookAndSay = map stringToNumber lookAndSay' 
 
 -- Desafio 2: Un foldr para una flor
 --
