@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 module Library where
 import PdePreludat hiding (foldr, sum, elem, all)
 import Prelude (foldr, sum, elem, all, Foldable(..))
@@ -19,7 +20,7 @@ foldl' funcion semilla [] = semilla
 foldl' funcion semilla (x : xs) = foldl' funcion (funcion semilla x) xs
 
 length':: [a] -> Number
-length' = sum . map (\x -> 1)
+length' = sum . map (const 1)
 
 cuentaDigitos :: String -> String
 cuentaDigitos string = show (length' string) ++ [head string]
@@ -45,9 +46,11 @@ charToNumber '6' = 6
 charToNumber '7' = 7
 charToNumber '8' = 8
 charToNumber '9' = 9
+-- charToNumber _ =
+-- Indica falta de patron de un numero en char 
 
 agregaDigitoAlFinal :: Number -> Number -> Number
-agregaDigitoAlFinal num otroNum = num * 10 + otroNum 
+agregaDigitoAlFinal num otroNum = num * 10 + otroNum
 
 stringToNumber :: [Char] -> Number
 stringToNumber string = foldl' agregaDigitoAlFinal 0 (map charToNumber string)
@@ -56,7 +59,7 @@ lookAndSay' :: [String]
 lookAndSay' = iterate auxiliar "1"
 
 lookAndSay :: [Number]
-lookAndSay = map stringToNumber lookAndSay' 
+lookAndSay = map stringToNumber lookAndSay'
 
 -- Desafio 2: Un foldr para una flor
 --
